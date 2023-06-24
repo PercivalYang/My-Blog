@@ -34,4 +34,9 @@ public interface AdminUserService {
      */
     Boolean updateName(Integer loginUserId, String loginUserName, String nickName);
 
+    /**
+     * 增加新的用户
+     *
+     */
+    Boolean insertUser(String loginUserName, String nickName, String loginPassword);
 }

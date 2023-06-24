@@ -1,5 +1,6 @@
 package com.site.blog.my.core.service.impl;
 
+import cn.hutool.core.util.BooleanUtil;
 import com.site.blog.my.core.dao.AdminUserMapper;
 import com.site.blog.my.core.entity.AdminUser;
 import com.site.blog.my.core.service.AdminUserService;
@@ -60,4 +61,14 @@ public class AdminUserServiceImpl implements AdminUserService {
         }
         return false;
     }
+
+    @Override
+    public Boolean insertUser(String loginUserName, String nickName, String loginPassword) {
+        String passwordMD5 = MD5Util.MD5Encode(loginPassword, "UTF-8");
+        AdminUser newer = AdminUser.builder().loginUserName(loginUserName).loginPassword(passwordMD5).nickName(nickName).locked((byte) 0).build();
+        int succeess = adminUserMapper.insert(newer);
+        return succeess == 1 ? Boolean.TRUE : Boolean.FALSE;
+    }
+
+
 }

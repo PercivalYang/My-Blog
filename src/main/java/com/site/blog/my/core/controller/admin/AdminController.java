@@ -136,4 +136,23 @@ public class AdminController {
         request.getSession().removeAttribute("errorMsg");
         return "admin/login";
     }
+
+    @GetMapping("/register")
+    public String register() {
+        return "/admin/register";
+    }
+
+    @PostMapping("/register")
+    public String register(@RequestParam("userName") String userName,
+                           @RequestParam("nickName") String nickName,
+                           @RequestParam("password") String password,
+                           HttpSession session) {
+        Boolean success = adminUserService.insertUser(userName, nickName, password);
+        if (success) {
+            return "redirect:/admin/index";
+        }else {
+            session.setAttribute("errorMsg", "注册失败");
+            return "admin/register";
+        }
+    }
 }

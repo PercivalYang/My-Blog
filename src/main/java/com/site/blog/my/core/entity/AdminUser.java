@@ -1,6 +1,12 @@
 package com.site.blog.my.core.entity;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 public class AdminUser {
+
     private Integer adminUserId;
 
     private String loginUserName;
